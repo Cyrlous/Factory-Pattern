@@ -26,6 +26,30 @@ public static class VehicleFactory
         } while (_validInput == false);
     }
 
+    private static void DriveCars()
+    {
+        foreach (Car car in carList)
+        {
+            car.Drive();
+        }
+    }
+    
+    private static void DriveCycles()
+    {
+        foreach (Motorcycle cycle in cycleList)
+        {
+            cycle.Drive();
+        }
+    }
+    
+    private static void DriveRigs()
+    {
+        foreach (BigRig rig in rigList)
+        {
+            rig.Drive();
+        }
+    }
+
     public static void VehicleTracker()
     {
         //Main loop.  Will continue to allow user to make selections
