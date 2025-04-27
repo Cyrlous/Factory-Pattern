@@ -4,6 +4,6 @@ public class BigRig : IVehicle
 {
     public void Drive()
     {
-        Console.WriteLine("You have created an awesome new big rig!");
+        Console.WriteLine("Big Rig is driving.");
     }
 }
