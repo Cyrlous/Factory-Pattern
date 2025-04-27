@@ -4,6 +4,6 @@ public class Car : IVehicle
 {
     public void Drive()
     {
-        Console.WriteLine("Car is driving.");
+        Console.WriteLine("\nCar is driving.");
     }
 }

@@ -4,10 +4,13 @@ public static class VehicleFactory
 {
     private static bool _validInput = false;
     private static int _answer = 0;
+    
+    //These lists store vehicles of the  respective types when entered by user
     private static List<Car> carList = new List<Car>();
     private static List<Motorcycle> cycleList = new List<Motorcycle>();
     private static List<BigRig> rigList = new List<BigRig>();
 
+    //This method creates a new vehicle the type of which is based upon the number of wheels
     public static IVehicle GetVehicle(string numTires)
     {
         do
@@ -25,7 +28,7 @@ public static class VehicleFactory
             }
         } while (_validInput == false);
     }
-
+    //The following three methods will run the Drive method for all items in the respective lists
     private static void DriveCars()
     {
         foreach (Car car in carList)
@@ -49,17 +52,60 @@ public static class VehicleFactory
             rig.Drive();
         }
     }
+    //This is a method to implement the Drive Cars portion of the Vehicle Tracker
+    private static void DriveMenu()
+    {
+        do
+        {
+            Console.WriteLine("Please select which set of vehicles you want to drive:\n");
+            Console.WriteLine("1. Cars");
+            Console.WriteLine("2. Motorcycles");
+            Console.WriteLine("3. Big Rigs");
+            Console.WriteLine("4. All Vehicles");
+
+            string input = Console.ReadLine();
+
+            switch (input)
+            {
+                case "1":
+                    DriveCars();
+                    _validInput = true;
+                    break;
+                case "2":
+                    DriveCycles();
+                    _validInput = true;
+                    break;
+                case "3":
+                    DriveRigs();
+                    _validInput = true;
+                    break;
+                case "4":
+                    DriveCars();
+                    Console.WriteLine("");
+                    DriveCycles();
+                    Console.WriteLine("");
+                    DriveRigs();
+                    _validInput = true;
+                    break;
+                default:
+                    Console.WriteLine("Please enter a valid selection.");
+                    _validInput = false;
+                    break;
+            }
+        } while (!_validInput);
+    }
 
     public static void VehicleTracker()
     {
         //Main loop.  Will continue to allow user to make selections
-        //until 3 is selected at which point the program will exit
+        //until 4 is selected at which point the program will exit
         do
         {
             Console.WriteLine("Vehicle Creator\n");
             Console.WriteLine("1. Create Vehicle");
             Console.WriteLine("2. Check Vehicle Count");
-            Console.WriteLine("3. Exit\n");
+            Console.WriteLine("3. Drive Cars");
+            Console.WriteLine("4. Exit\n");
             Console.WriteLine("Please Enter Your Selection:");
 
             //Filter user input to ensure it is an integer
@@ -115,7 +161,7 @@ public static class VehicleFactory
                                 _validInput = false;
                                 break;
                         }
-                    } while (_validInput == false);
+                    } while (!_validInput);
 
                     break;
                 }
@@ -131,8 +177,16 @@ public static class VehicleFactory
                     Console.ReadLine();
                     break;
                 }
-                //Case 3 will exit the program
+                //Case 3 will allow user to select which vehicles to drive
                 case 3:
+                {
+                    DriveMenu();
+                    Console.WriteLine("\nPlease press enter to continue.");
+                    Console.ReadLine();
+                    break;
+                }
+                //Case 4 will exit the program
+                case 4:
                 {
                     Console.WriteLine($"Thank you for using the Vehicle Creator.  Please have a nice day.");
                     break;
@@ -143,6 +197,6 @@ public static class VehicleFactory
                     break;
                 }
             }
-        } while (_answer != 3);
+        } while (_answer != 4);
     }
 }
